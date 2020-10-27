@@ -49,6 +49,7 @@ router.get("/accounts/:id", auth, async (req, res) => {
 
 // Update account
 router.patch("/accounts/:id", auth, async (req, res) => {
+  console.log("in Patch");
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "address",
@@ -56,6 +57,7 @@ router.patch("/accounts/:id", auth, async (req, res) => {
     "dateOfBirth",
     "age",
     "sex",
+    "accountNo",
     "contactNo",
     "contactEmail",
     "accountType",
@@ -71,7 +73,7 @@ router.patch("/accounts/:id", auth, async (req, res) => {
   try {
     const task = await Task.findOne({
       _id: req.params.id,
-      owner: req.user._id,
+      createdBy: req.user._id,
     });
 
     if (!task) {
@@ -87,11 +89,12 @@ router.patch("/accounts/:id", auth, async (req, res) => {
 });
 
 // Delete Account
-router.delete("/accounts /:id", auth, async (req, res) => {
+router.delete("/accounts/:id", auth, async (req, res) => {
+  console.log("in delete");
   try {
     const task = await Task.findOneAndDelete({
       _id: req.params.id,
-      owner: req.user._id,
+      createdBy: req.user._id,
     });
 
     if (!task) {
