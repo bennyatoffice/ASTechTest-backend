@@ -1,6 +1,9 @@
 # ASTechTest-backend
 
-mongodb Server should be available on the system.
+Requirments to run the application
+
+1.nodejs
+2.mongodb Server should be available on the system.
 
 # To run the application
 
